@@ -2,6 +2,10 @@ var quizBtn = document.getElementById("quizButton");
 var ques = document.getElementById("question");
 var content = document.querySelector(".content");
 var queslistEl = document.getElementById("question-list");
+var minutes = document.getElementById("minutes");
+var seconds = document.getElementById("seconds");
+var minutes = document.querySelector("#minutes");
+var seconds = document.querySelector("#seconds");
 
 var i=0; var k=0;
 var score=0;
@@ -51,7 +55,7 @@ function startQuiz(event){
     
     content.textContent = "";
     quizBtn.remove();
-    
+ 
     if(arrQues[i] !== undefined){
          console.log(arrQues[i]);
         ques.textContent = arrQues[i].q;
@@ -105,6 +109,7 @@ function ansSelection(event){
 }
 
 function showResults(){
+    stopTimer();
      console.log("Inside showResults");
      content.textContent = "";
      queslistEl.innerHTML = "";
@@ -134,5 +139,29 @@ function showResults(){
     
 }
 
+function startTimer(){
+console.log("Inside start timer");
+var totalSeconds = 80;
+var secondsElapsed = 0;
+   if (totalSeconds > 0) {
+      var interval = setInterval(function() {
+        secondsElapsed++;  
+        var secondsLeft = totalSeconds - secondsElapsed;          
+        var minutesLeft = Math.floor(secondsLeft / 60); 
+        var secondsLeft2 = Math.floor(secondsLeft % 60); 
+        console.log("Secondsleft" +secondsLeft2);
+        console.log("minutesleft" +minutesLeft);
+        minutes.textContent = minutesLeft;
+        seconds.textContent = secondsLeft2;
+       }, 1000);
+       } 
+//      else {
+//        alert("Minutes of work/rest must be greater than 0.")
+//    }
+}
+
+
+
+quizBtn.addEventListener("click",  startTimer);
 quizBtn.addEventListener("click", startQuiz);
 queslistEl.addEventListener("click", ansSelection);
