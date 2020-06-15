@@ -3,7 +3,9 @@ var ques = document.getElementById("question");
 var content = document.querySelector(".content");
 var queslistEl = document.getElementById("question-list");
 
-var i=0; 
+var i=0; var k=0;
+var score=0;
+var userId = "";
 
 var arrQues = [
     {q: "Where is the correct place to insert a JavaScript? ",  
@@ -13,15 +15,37 @@ var arrQues = [
      "Below the <body> section"],
      a: "Below the <body> section"},
    
-    {q: "How do you write 'Hello World' in alert box?.",
+    {q: "Which builtin method returns the length of the string?",
+    options : ["length()",
+     "size()",
+     "index()",
+     "None of the above"],
+    a: "length()"},
+
+    {q: "How do you write 'Hello World' in alert box?",
     options : ["AlertBox(\"Hello World\")",
      "msg(\"Hello World\")",
      "Alert(\"Hello World\")",
      "MsgBox(\"Hello World\")"],
-    a: "Alert(\"Hello World\")"}
+    a: "Alert(\"Hello World\")"},
+  
+
+    {q: "Which built-in method reverses the order of the elements of an array?",
+    options : ["changeOrder(order)",
+     "reverse()",
+     "sort(order)",
+     "None of the above"],
+    a: "reverse()"},
+
+    {q: "What is the function of Array object that runs through each element of the array?",
+    options : ["concat()",
+     "each()",
+     "filter()",
+     "forEach()"],
+    a: "forEach()"}
 ]
-   
-//     {q: "Tea contains more caffeine than coffee and soda.", a: "No"},
+
+//   {q: "Tea contains more caffeine than coffee and soda.", a: "No"},
    
 //     {q: "A cube has 16 straight edges in total.", a:"No"},
 
@@ -29,31 +53,58 @@ var arrQues = [
     
 // }];
 
-function startQuiz(){
-   
+function startQuiz(event){
+    
     content.textContent = "";
     quizBtn.remove();
-    console.log(arrQues[i]);
+    
+    // console.log(arrQues[i]);
     if(arrQues[i] !== undefined){
        
-        console.log(arrQues[i].q);
+        // console.log(arrQues[i].q);
         ques.textContent = arrQues[i].q;
- 
+       
             for(var j=0 ; j<arrQues[i].options.length; j++){
-                console.log(arrQues[i].options[j]);
+                // console.log(arrQues[i].options[j]);
                 var li = document.createElement("li");
                 li.innerHTML = (j+1) + ". " +arrQues[i].options[j];
+                li.setAttribute("id", j);
                 ques.append(li);
             }
+
+                
+      
      i++;
-    //    (arrQues[i].q);
+    
 }
 }
 
 function ansSelection(event){
+    event.preventDefault();
     if(event.target.matches("li")){
-        startQuiz();
+       userId = event.target.id;
+       
+    //    console.log(event.currentTarget.value);
+       console.log("Target Id: " +userId);
+
+        var userAns = arrQues[k].options[userId];
+        console.log("userAns: " +userAns);
+        if(typeof userId !== "undefined"){
+                
+            if(userAns === arrQues[k].a){
+                console.log("FinaluserSelection " +userId);
+                console.log("FinalCorrectAnswer : " +arrQues[k].a)
+            score++;
+       
+        }
+        k++;
     }
+    startQuiz();
+    console.log("My Score" +score);    
+
+    }
+   
 }
+
 quizBtn.addEventListener("click", startQuiz);
 queslistEl.addEventListener("click", ansSelection);

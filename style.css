@@ -6,6 +6,13 @@
     background-color: brown;
 } */
 
-li{
-    text-decoration: none;
+ul {
+   list-style-type: none;
+   
+}
+
+ul li{
+    margin : 3px;
+    background-color: darkseagreen;
+   
 }
