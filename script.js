@@ -5,9 +5,9 @@ var queslistEl = document.getElementById("question-list");
 // var minutes = document.getElementById("minutes");
 // var seconds = document.getElementById("seconds");
 // var minutes = document.querySelector("#minutes");
-var seconds = document.querySelector("#seconds");
-var time =  document.querySelector(".time");
-
+// var seconds = document.querySelector("#seconds");
+// var time =  document.querySelector(".time");
+var container = document.querySelector(".container");
 
 var i=0; var k=0;
 var score=0;
@@ -149,6 +149,13 @@ function startTimer(){
 console.log("Inside start timer");
 var totalSeconds = 80;
 var secondsElapsed = 0;
+var timer = document.createElement("div");
+timer.setAttribute("class", "time");
+timer.setAttribute("style", "position: absolute; top: 8px; right: 16px; font-size: 18px;");
+timer.textContent = "Time : ";
+var spanSeconds = document.createElement("span");
+spanSeconds.setAttribute("id", "seconds");
+
    if (totalSeconds > 0) {
       var interval = setInterval(function() {
         secondsElapsed++;  
@@ -156,11 +163,16 @@ var secondsElapsed = 0;
         // var minutesLeft = Math.floor(secondsLeft / 60); 
         // var secondsLeft2 = Math.floor(secondsLeft % 60); 
         // console.log("Secondsleft" +secondsLeft2);
-        console.log("secondsLeft" +secondsLeft);
-      
-        seconds.textContent = secondsLeft;
+        console.log("secondsLeft" +secondsLeft);   
+        spanSeconds.textContent = secondsLeft;
+        timer.append(spanSeconds);
+        container.append(timer);
        }, 1000);
        } 
+
+    //    <div class="time">Time <span id="seconds"></span>
+      
+     //  </div>
 //      else {
 //        alert("Minutes of work/rest must be greater than 0.")
 //    }
