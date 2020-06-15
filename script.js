@@ -2,18 +2,13 @@ var quizBtn = document.getElementById("quizButton");
 var ques = document.getElementById("question");
 var content = document.querySelector(".content");
 var queslistEl = document.getElementById("question-list");
-// var minutes = document.getElementById("minutes");
-// var seconds = document.getElementById("seconds");
-// var minutes = document.querySelector("#minutes");
-// var seconds = document.querySelector("#seconds");
-// var time =  document.querySelector(".time");
 var container = document.querySelector(".container");
 
 var i=0; var k=0;
 var score=0;
 var userId = "";
-var arrayLength = false;
-var liCount = 1;
+var liCount = 1;  
+var wrongAns = false;
 
 var arrQues = [
     {q: "Where is the correct place to insert a JavaScript? ",  
@@ -53,12 +48,9 @@ var arrQues = [
     a: "forEach()"}
 ]
 
-function display(){
-    time.textContent = "";
-}
 
 function startQuiz(event){
-    
+   
     content.textContent = "";
     quizBtn.remove();
    
@@ -80,27 +72,37 @@ function startQuiz(event){
 
 function ansSelection(event){
     event.preventDefault();
-
+   
     if(event.target.matches("li")){
        userId = event.target.id;
        console.log("Target Id: " +userId);
 
-            // if(event.target.matches("li")){     
-            // console.log("ArrayLength " +(arrQues.length));
-            // console.log("i value" +i);
-            // }
-
         var userAns = arrQues[k].options[userId];
         console.log("userAns: " +userAns);
+        var validateAns =  document.createElement("p"); 
+        validateAns.setAttribute("id", "result");
+
         if(typeof userId !== "undefined"){
-                
+               validateAns.innerText = "";
             if(userAns === arrQues[k].a){
                 console.log("FinaluserSelection " +userId);
-                console.log("FinalCorrectAnswer : " +arrQues[k].a)
+                console.log("FinalCorrectAnswer : " +arrQues[k].a);   
+                
+                validateAns.textContent = "Hurray Correct!!"
+                validateAns.setAttribute("style", "background-color:green; margin: 10px; font-size: 28px;");
+                
             score++;    
+        }else{          
+            validateAns.textContent = "Oops Wrong!!"
+            validateAns.setAttribute("style", "background-color:red;  margin: 10px; font-size: 28px;")
+            wrongAns = true;
+            
         }
         k++;
+        queslistEl.append(validateAns);
+       
     }
+   
     startQuiz();
     console.log("My Score" +score);    
     
@@ -111,6 +113,7 @@ function ansSelection(event){
         showResults();
     }
     liCount++;
+    
     } 
 }
 
@@ -146,37 +149,35 @@ function showResults(){
 }
 
 function startTimer(){
-console.log("Inside start timer");
-var totalSeconds = 80;
-var secondsElapsed = 0;
-var timer = document.createElement("div");
-timer.setAttribute("class", "time");
-timer.setAttribute("style", "position: absolute; top: 8px; right: 16px; font-size: 18px;");
-timer.textContent = "Time : ";
-var spanSeconds = document.createElement("span");
-spanSeconds.setAttribute("id", "seconds");
+    console.log("Inside start timer");
+    var totalSeconds = 80;
+    var secondsElapsed = 0;
+    var interval;
+    var timer = document.createElement("div");
+    timer.setAttribute("class", "time");
+    timer.setAttribute("style", "position: absolute; top: 8px; right: 16px; font-size: 18px;");
+    timer.textContent = "Time : ";
+    var spanSeconds = document.createElement("span");
+    spanSeconds.setAttribute("id", "seconds");
 
-   if (totalSeconds > 0) {
-      var interval = setInterval(function() {
-        secondsElapsed++;  
-        var secondsLeft = totalSeconds - secondsElapsed;          
-        // var minutesLeft = Math.floor(secondsLeft / 60); 
-        // var secondsLeft2 = Math.floor(secondsLeft % 60); 
-        // console.log("Secondsleft" +secondsLeft2);
-        console.log("secondsLeft" +secondsLeft);   
-        spanSeconds.textContent = secondsLeft;
-        timer.append(spanSeconds);
-        container.append(timer);
-       }, 1000);
-       } 
-
-    //    <div class="time">Time <span id="seconds"></span>
-      
-     //  </div>
-//      else {
-//        alert("Minutes of work/rest must be greater than 0.")
-//    }
-}
+    if (totalSeconds > 0) {
+         interval = setInterval(function() {
+            secondsElapsed++;  
+            var secondsLeft = totalSeconds - secondsElapsed;          
+            console.log("secondsLeft" +secondsLeft);   
+            spanSeconds.textContent = secondsLeft;
+            console.log("Wrong Ans" + wrongAns);
+            if(wrongAns){
+                var newSecondsLeft = secondsLeft - 10;
+                console.log("newSecondsLeft" +newSecondsLeft);   
+                spanSeconds.textContent = newSecondsLeft;  
+                wrongAns = false;          
+            }
+            timer.append(spanSeconds);
+            container.append(timer);
+        }, 1000);
+        } 
+    }
 
 
 
