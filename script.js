@@ -6,6 +6,8 @@ var queslistEl = document.getElementById("question-list");
 var i=0; var k=0;
 var score=0;
 var userId = "";
+var arrayLength = false;
+var liCount = 1;
 
 var arrQues = [
     {q: "Where is the correct place to insert a JavaScript? ",  
@@ -45,25 +47,15 @@ var arrQues = [
     a: "forEach()"}
 ]
 
-//   {q: "Tea contains more caffeine than coffee and soda.", a: "No"},
-   
-//     {q: "A cube has 16 straight edges in total.", a:"No"},
-
-//     {q: "Lungs are the largest internal organ in the human body.",a:"No"
-    
-// }];
-
 function startQuiz(event){
     
     content.textContent = "";
     quizBtn.remove();
     
-    // console.log(arrQues[i]);
     if(arrQues[i] !== undefined){
-       
-        // console.log(arrQues[i].q);
+         console.log(arrQues[i]);
         ques.textContent = arrQues[i].q;
-       
+      
             for(var j=0 ; j<arrQues[i].options.length; j++){
                 // console.log(arrQues[i].options[j]);
                 var li = document.createElement("li");
@@ -71,21 +63,22 @@ function startQuiz(event){
                 li.setAttribute("id", j);
                 ques.append(li);
             }
-
-                
-      
      i++;
-    
-}
+      
+    }
 }
 
 function ansSelection(event){
     event.preventDefault();
+
     if(event.target.matches("li")){
        userId = event.target.id;
-       
-    //    console.log(event.currentTarget.value);
        console.log("Target Id: " +userId);
+
+            // if(event.target.matches("li")){     
+            // console.log("ArrayLength " +(arrQues.length));
+            // console.log("i value" +i);
+            // }
 
         var userAns = arrQues[k].options[userId];
         console.log("userAns: " +userAns);
@@ -94,17 +87,31 @@ function ansSelection(event){
             if(userAns === arrQues[k].a){
                 console.log("FinaluserSelection " +userId);
                 console.log("FinalCorrectAnswer : " +arrQues[k].a)
-            score++;
-       
+            score++;    
         }
         k++;
     }
     startQuiz();
     console.log("My Score" +score);    
+    
+    console.log("liCount" +liCount);
 
+    if(liCount === arrQues.length){
+        console.log("Show Results");
+        showResults();
     }
-   
+    liCount++;
+    } 
 }
+
+function showResults(){
+     console.log("Inside showResults");
+     content.textContent = "";
+     queslistEl.innerHTML = "";
+
+}
+
+
 
 quizBtn.addEventListener("click", startQuiz);
 queslistEl.addEventListener("click", ansSelection);
