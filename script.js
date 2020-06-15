@@ -108,10 +108,31 @@ function showResults(){
      console.log("Inside showResults");
      content.textContent = "";
      queslistEl.innerHTML = "";
-
+     var ptag = document.createElement("p");
+     ptag.textContent = "Congratulations!!! You secured " +(score/arrQues.length)*100 +" percentage ";
+     content.append(ptag);
+    //  var table = document.createElement("table");
+    //  var tr1 = document.createElement("tr");
+    //  var tr2 = document.createElement("tr");
+    //  var th = document.createElement("th");
+    var ptag2 =  document.createElement("p");
+    ptag2.textContent = "Your final score: " +score;  
+    content.append(ptag2);
+    var ptag3 =  document.createElement("p");
+    var label = document.createElement("label");
+    label.setAttribute("for", "initials");
+    label.textContent = "Your Initials: ";
+    label.setAttribute("style", "margin-right:8px;");
+    var input = document.createElement("input");
+     input.setAttribute("type", "text");
+     input.setAttribute("name", "initials");
+     input.setAttribute("id", "initials");
+     
+     ptag3.append(label);
+     ptag3.appendChild(input);
+     content.append(ptag3);
+    
 }
-
-
 
 quizBtn.addEventListener("click", startQuiz);
 queslistEl.addEventListener("click", ansSelection);
