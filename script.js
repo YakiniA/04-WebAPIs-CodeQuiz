@@ -100,7 +100,7 @@ function ansSelection(event){
                 resultDisplay.textContent = "Hurray Correct!!"
                 resultDisplay.setAttribute("style", "background-color:green; margin: 8px; width:150px; font-size: 20px;");
                 
-            score++;    
+            score = score+10;    
         }else{          
             resultDisplay.textContent = "Oops Wrong!!"
             resultDisplay.setAttribute("style", "background-color:red;  margin: 8px;  width:150px; font-size: 20px;");            totalSeconds = totalSeconds - 10;
@@ -132,7 +132,7 @@ function showResults(){
     queslistEl.innerHTML = "";
     ptag = document.createElement("p");
     ptag.setAttribute("class", "mt-4")
-    ptag.textContent = "Congratulations!!! You secured " +(score/arrQues.length)*100 +" percentage ";
+    ptag.textContent = "Completed!!! You secured " +(score/50)*100 +" percentage ";
     content.append(ptag);
     var ptag2 =  document.createElement("p");
     ptag2.textContent = "Your final score: " +score;  
@@ -197,7 +197,7 @@ document.addEventListener("click",function(event){
      content.textContent = "";
      resultDisplay.textContent = "";
      highscoreDisplay.textContent = "Highscores";
-     highscoreDisplay.setAttribute("style","font-size:28px; font-style:bold; margin-bottom:25px;");
+     highscoreDisplay.setAttribute("style","font-size:28px; font-style:bold; padding:25px;");
 
      var userDetails = {
          userInitials : enteredInitials,
@@ -207,7 +207,7 @@ document.addEventListener("click",function(event){
 
     var lastUser = JSON.parse(localStorage.getItem("userDetails"));
     highscoreValue.textContent = lastUser.userInitials+ " - " +lastUser.score; 
-    highscoreValue.setAttribute("style","margin-bottom:16px");
+    highscoreValue.setAttribute("style","margin:16px 0; font-size:18px;");
     console.log(lastUser.userInitials);
     console.log(lastUser.score);
     highscoreDisplay.append(highscoreValue);
