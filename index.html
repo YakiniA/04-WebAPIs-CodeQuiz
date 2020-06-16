@@ -7,30 +7,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel= "stylesheet" href="style.css">
 </head>
   <body>
+ 
+
+  <div class="row header">
+
+    <div class="col">
+
+      <div>
+
+        <header>
+          <h3>Coding Quiz Challenge</h3>
+        </header>
+
+        <span id="highscore">View Highscores</span>
+        <span id="timer">Time: 75 seconds</span>
+
+      </div>
+
+    </div>
+
+  </div>
    
     <div class="container">
-    
-   
-      <header>
-        <h3>Coding Quiz Challenge</h3>
-      </header>
 
-      <!-- <div class="time">Time <span id="seconds"></span>
-      
-      </div> -->
+      <img src="Assets/WordPress-Quiz-plugin.jpg" class="quizImage img-fluid" alt="Responsive image">
+   
     
     <p class= "content">Let's test your knowledge on HTML and Web Development</p>
 
     <button id="quizButton" class="btn btn-primary" type="submit">Start Quiz</button>
     
-    <ul id= "question-list">
-    <p id="question"></p>
- 
-    </ul>
+    <div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+      <ul id= "question-list">
+      <p id="question"></p>
+  
+      </ul>
+
+      <div id="resultDisplay"> </div>
+    </div>
+    </div>
      
     
     </div>

@@ -3,6 +3,8 @@ var ques = document.getElementById("question");
 var content = document.querySelector(".content");
 var queslistEl = document.getElementById("question-list");
 var container = document.querySelector(".container");
+var quizImage =document.querySelector(".quizImage");
+var resultDisplay = document.getElementById("resultDisplay");
 
 var i=0; var k=0;
 var score=0;
@@ -54,6 +56,7 @@ var arrQues = [
 function startQuiz(event){
    
     content.textContent = "";
+    quizImage.remove();
     quizBtn.remove();
    
     if(arrQues[i] !== undefined){
@@ -82,28 +85,25 @@ function ansSelection(event){
 
         var userAns = arrQues[k].options[userId];
         console.log("userAns: " +userAns);
-        var validateAns =  document.createElement("p"); 
-        validateAns.setAttribute("id", "result");
 
         if(typeof userId !== "undefined"){
-               validateAns.innerText = "";
+            resultDisplay.textContent = "";
                wrongAns = false;
             if(userAns === arrQues[k].a){
                 console.log("FinaluserSelection " +userId);
                 console.log("FinalCorrectAnswer : " +arrQues[k].a);   
                 
-                validateAns.textContent = "Hurray Correct!!"
-                validateAns.setAttribute("style", "background-color:green; margin: 10px; font-size: 28px;");
+                resultDisplay.textContent = "Hurray Correct!!"
+                resultDisplay.setAttribute("style", "background-color:green; margin: 8px; width:150px; font-size: 20px;");
                 
             score++;    
         }else{          
-            validateAns.textContent = "Oops Wrong!!"
-            validateAns.setAttribute("style", "background-color:red;  margin: 10px; font-size: 28px;")
+            resultDisplay.textContent = "Oops Wrong!!"
+            resultDisplay.setAttribute("style", "background-color:red;  margin: 8px;  width:150px; font-size: 20px;")
             wrongAns = true;
             
         }
         k++;
-        queslistEl.append(validateAns);
        
     }
    
@@ -123,6 +123,7 @@ function ansSelection(event){
 
 function showResults(){
     stopTimer();
+    
      console.log("Inside showResults");
      content.textContent = "";
      queslistEl.innerHTML = "";
@@ -213,6 +214,7 @@ function startTimer(){
 
 function stopTimer(){
     clearInterval(interval);
+    
 }
 
 quizBtn.addEventListener("click",  startTimer);
