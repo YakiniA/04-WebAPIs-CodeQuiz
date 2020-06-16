@@ -13,6 +13,8 @@ var userId = "";
 var liCount = 1;  
 var wrongAns = false;
 var interval;
+// var secondsLeft;  
+var totalSeconds = 80;
 
 
 var arrQues = [
@@ -102,6 +104,7 @@ function ansSelection(event){
             resultDisplay.textContent = "Oops Wrong!!"
             resultDisplay.setAttribute("style", "background-color:red;  margin: 8px;  width:150px; font-size: 20px;")
             wrongAns = true;
+            totalSeconds = totalSeconds - 10;
             
         }
         k++;
@@ -179,8 +182,8 @@ function showResults(){
 function startTimer(){
     
     console.log("Inside start timer");
-    var totalSeconds = 80;
-    var secondsElapsed = 0;
+  
+    // var secondsElapsed = 0;
   
     // var timer = document.createElement("div");
     // timer.setAttribute("class", "time");
@@ -188,29 +191,25 @@ function startTimer(){
     // timer.textContent = "Time : ";
     // var spanSeconds = document.createElement("span");
     // spanSeconds.setAttribute("id", "seconds");
-    
-    if (totalSeconds > 0) {
-         interval = setInterval(function() {
-            secondsElapsed++; 
-            var secondsLeft;  
-            console.log("Wrong Ans" + wrongAns);
-            if(wrongAns){
-               
-                var sec = (totalSeconds - secondsElapsed);
-                secondsLeft =  sec - 10;
-                // console.log("newSecondsLeft" +secondsLeft);    
-                        
-            }else{
-                
-                secondsLeft = totalSeconds - secondsElapsed ;        
-                
+    interval = setInterval(function() {
+       
+                // secondsElapsed++; 
+                totalSeconds--;
+                // console.log("Wrong Ans" + wrongAns);
+                // secondsLeft = totalSeconds - secondsElapsed ;   
+                // if(wrongAns){
+                // totalSeconds = totalSeconds - 10;
+                // }
+                // console.log("secondsLeft" +secondsLeft);   
+                timer.textContent = "Time : " +totalSeconds;
+                // timer.append(spanSeconds);               
+        
+             if(totalSeconds<0){
+                stopTimer();
+                alert("Time Up!!!");
+                showResults();
             }
-            // console.log("secondsLeft" +secondsLeft);   
-            timer.textContent = "Time : " +secondsLeft;
-            // timer.append(spanSeconds);
-            
         }, 1000);
-        } 
     }
 
 function stopTimer(){
