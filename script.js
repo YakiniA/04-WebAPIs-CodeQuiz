@@ -13,9 +13,7 @@ var i=0; var k=0;
 var score=0;
 var userId = "";
 var liCount = 1;  
-var wrongAns = false;
 var interval;
-// var secondsLeft;  
 var totalSeconds = 80;
 var ptag;
 var input;
@@ -94,7 +92,7 @@ function ansSelection(event){
 
         if(typeof userId !== "undefined"){
             resultDisplay.textContent = "";
-               wrongAns = false;
+              
             if(userAns === arrQues[k].a){
                 console.log("FinaluserSelection " +userId);
                 console.log("FinalCorrectAnswer : " +arrQues[k].a);   
@@ -105,9 +103,7 @@ function ansSelection(event){
             score++;    
         }else{          
             resultDisplay.textContent = "Oops Wrong!!"
-            resultDisplay.setAttribute("style", "background-color:red;  margin: 8px;  width:150px; font-size: 20px;")
-            wrongAns = true;
-            totalSeconds = totalSeconds - 10;
+            resultDisplay.setAttribute("style", "background-color:red;  margin: 8px;  width:150px; font-size: 20px;");            totalSeconds = totalSeconds - 10;
             
         }
         k++;
@@ -131,17 +127,13 @@ function ansSelection(event){
 function showResults(){
     stopTimer();
     
-     console.log("Inside showResults");
-     content.textContent = "";
-     queslistEl.innerHTML = "";
-     ptag = document.createElement("p");
-     ptag.setAttribute("class", "mt-4")
-     ptag.textContent = "Congratulations!!! You secured " +(score/arrQues.length)*100 +" percentage ";
-     content.append(ptag);
-    //  var table = document.createElement("table");
-    //  var tr1 = document.createElement("tr");
-    //  var tr2 = document.createElement("tr");
-    //  var th = document.createElement("th");
+    console.log("Inside showResults");
+    content.textContent = "";
+    queslistEl.innerHTML = "";
+    ptag = document.createElement("p");
+    ptag.setAttribute("class", "mt-4")
+    ptag.textContent = "Congratulations!!! You secured " +(score/arrQues.length)*100 +" percentage ";
+    content.append(ptag);
     var ptag2 =  document.createElement("p");
     ptag2.textContent = "Your final score: " +score;  
     content.append(ptag2);
@@ -167,24 +159,13 @@ function showResults(){
      button.textContent = "Submit";
      div.append(label);
      div.append(input);
-
      form.append(div);
      form.append(button);
      ptag3.append(form);  
      content.append(ptag3);
-    
-//      <form>
-//   <div class="form-group">
-//     <label for="email">Email address:</label>
-//     <input type="email" class="form-control" placeholder="Enter email" id="email">
-//   </div>
-//  
-//   <button type="submit" class="btn btn-primary">Submit</button>
-// </form>
 }
 
 function startTimer(){
-
     interval = setInterval(function() {
         totalSeconds--;
         timer.textContent = "Time : " +totalSeconds;         
@@ -216,7 +197,7 @@ document.addEventListener("click",function(event){
      content.textContent = "";
      resultDisplay.textContent = "";
      highscoreDisplay.textContent = "Highscores";
-     highscoreDisplay.setAttribute("style","font-size:20px; font-style:bold");
+     highscoreDisplay.setAttribute("style","font-size:28px; font-style:bold; margin-bottom:25px;");
 
      var userDetails = {
          userInitials : enteredInitials,
@@ -226,23 +207,29 @@ document.addEventListener("click",function(event){
 
     var lastUser = JSON.parse(localStorage.getItem("userDetails"));
     highscoreValue.textContent = lastUser.userInitials+ " - " +lastUser.score; 
+    highscoreValue.setAttribute("style","margin-bottom:16px");
     console.log(lastUser.userInitials);
     console.log(lastUser.score);
     highscoreDisplay.append(highscoreValue);
    
     var button1 = document.createElement("button");
     button1.setAttribute("id", "goBack");
-    button1.setAttribute("class", "btn btn-primary");
+    button1.setAttribute("class", "btn btn-primary mr-5");
     button1.textContent = "Go Back";
 
     var button2 = document.createElement("button");
     button2.setAttribute("id", "clearHighscores");
     button2.setAttribute("class", "btn btn-primary");
     button2.textContent = "Clear Highscores";
-    // highscoreValue.append(button1);
-    // highscoreValue.append(button2);
+
     highscoreDisplay.append(button1);
     highscoreDisplay.append(button2);
+
+    button2.addEventListener("click", function(event) {
+          event.preventDefault();
+          highscoreValue.textContent = "";
+
+    });
 
   }
 });
