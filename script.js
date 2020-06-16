@@ -180,34 +180,15 @@ function showResults(){
 }
 
 function startTimer(){
-    
-    console.log("Inside start timer");
-  
-    // var secondsElapsed = 0;
-  
-    // var timer = document.createElement("div");
-    // timer.setAttribute("class", "time");
-    // timer.setAttribute("style", "position: absolute; top: 8px; right: 16px; font-size: 18px;");
-    // timer.textContent = "Time : ";
-    // var spanSeconds = document.createElement("span");
-    // spanSeconds.setAttribute("id", "seconds");
+
     interval = setInterval(function() {
-       
-                // secondsElapsed++; 
-                totalSeconds--;
-                // console.log("Wrong Ans" + wrongAns);
-                // secondsLeft = totalSeconds - secondsElapsed ;   
-                // if(wrongAns){
-                // totalSeconds = totalSeconds - 10;
-                // }
-                // console.log("secondsLeft" +secondsLeft);   
-                timer.textContent = "Time : " +totalSeconds;
-                // timer.append(spanSeconds);               
-        
+        totalSeconds--;
+        timer.textContent = "Time : " +totalSeconds;         
              if(totalSeconds<0){
-                stopTimer();
                 alert("Time Up!!!");
+                stopTimer();
                 showResults();
+                timer.textContent = "Time : 0";
             }
         }, 1000);
     }
