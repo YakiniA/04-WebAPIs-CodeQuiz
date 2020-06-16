@@ -8,9 +8,6 @@ var resultDisplay = document.getElementById("resultDisplay");
 var timer = document.querySelector("#timer");
 var highscoreDisplay = document.getElementById("highscoreDisplay");
 var highscoreValue = document.getElementById("highscoreValue");
-var goBack         = document.getElementById("goBack");
-var clearHighscores = document.getElementById("clearHighscores");
-
 
 var i=0; var k=0;
 var score=0;
@@ -22,8 +19,6 @@ var interval;
 var totalSeconds = 80;
 var ptag;
 var input;
-
-
 
 var arrQues = [
     {q: "Where is the correct place to insert a JavaScript? ",  
@@ -220,8 +215,6 @@ document.addEventListener("click",function(event){
      console.log("enteredInitials" +enteredInitials);
      content.textContent = "";
      resultDisplay.textContent = "";
-     goBack.style.visibility = "visible";
-     clearHighscores.style.visibility = "visible";
      highscoreDisplay.textContent = "Highscores";
      highscoreDisplay.setAttribute("style","font-size:20px; font-style:bold");
 
@@ -236,7 +229,20 @@ document.addEventListener("click",function(event){
     console.log(lastUser.userInitials);
     console.log(lastUser.score);
     highscoreDisplay.append(highscoreValue);
-  
-    
+   
+    var button1 = document.createElement("button");
+    button1.setAttribute("id", "goBack");
+    button1.setAttribute("class", "btn btn-primary");
+    button1.textContent = "Go Back";
+
+    var button2 = document.createElement("button");
+    button2.setAttribute("id", "clearHighscores");
+    button2.setAttribute("class", "btn btn-primary");
+    button2.textContent = "Clear Highscores";
+    // highscoreValue.append(button1);
+    // highscoreValue.append(button2);
+    highscoreDisplay.append(button1);
+    highscoreDisplay.append(button2);
+
   }
 });
