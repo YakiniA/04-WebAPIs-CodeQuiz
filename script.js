@@ -5,6 +5,7 @@ var queslistEl = document.getElementById("question-list");
 var container = document.querySelector(".container");
 var quizImage =document.querySelector(".quizImage");
 var resultDisplay = document.getElementById("resultDisplay");
+var timer = document.querySelector("#timer");
 
 var i=0; var k=0;
 var score=0;
@@ -128,6 +129,7 @@ function showResults(){
      content.textContent = "";
      queslistEl.innerHTML = "";
      var ptag = document.createElement("p");
+     ptag.setAttribute("class", "mt-4")
      ptag.textContent = "Congratulations!!! You secured " +(score/arrQues.length)*100 +" percentage ";
      content.append(ptag);
     //  var table = document.createElement("table");
@@ -180,12 +182,12 @@ function startTimer(){
     var totalSeconds = 80;
     var secondsElapsed = 0;
   
-    var timer = document.createElement("div");
-    timer.setAttribute("class", "time");
-    timer.setAttribute("style", "position: absolute; top: 8px; right: 16px; font-size: 18px;");
-    timer.textContent = "Time : ";
-    var spanSeconds = document.createElement("span");
-    spanSeconds.setAttribute("id", "seconds");
+    // var timer = document.createElement("div");
+    // timer.setAttribute("class", "time");
+    // timer.setAttribute("style", "position: absolute; top: 8px; right: 16px; font-size: 18px;");
+    // timer.textContent = "Time : ";
+    // var spanSeconds = document.createElement("span");
+    // spanSeconds.setAttribute("id", "seconds");
     
     if (totalSeconds > 0) {
          interval = setInterval(function() {
@@ -204,9 +206,8 @@ function startTimer(){
                 
             }
             // console.log("secondsLeft" +secondsLeft);   
-            spanSeconds.textContent = secondsLeft;
-            timer.append(spanSeconds);
-            container.append(timer);
+            timer.textContent = "Time : " +secondsLeft;
+            // timer.append(spanSeconds);
             
         }, 1000);
         } 
