@@ -9,6 +9,8 @@ var score=0;
 var userId = "";
 var liCount = 1;  
 var wrongAns = false;
+var interval;
+
 
 var arrQues = [
     {q: "Where is the correct place to insert a JavaScript? ",  
@@ -55,9 +57,10 @@ function startQuiz(event){
     quizBtn.remove();
    
     if(arrQues[i] !== undefined){
-         console.log(arrQues[i]);
+       
+        console.log(arrQues[i]);
         ques.textContent = arrQues[i].q;
-      
+        
             for(var j=0 ; j<arrQues[i].options.length; j++){
                 // console.log(arrQues[i].options[j]);
                 var li = document.createElement("li");
@@ -65,8 +68,7 @@ function startQuiz(event){
                 li.setAttribute("id", j);
                 ques.append(li);
             }
-     i++;
-      
+     i++;    
     }
 }
 
@@ -74,6 +76,7 @@ function ansSelection(event){
     event.preventDefault();
    
     if(event.target.matches("li")){
+      
        userId = event.target.id;
        console.log("Target Id: " +userId);
 
@@ -84,6 +87,7 @@ function ansSelection(event){
 
         if(typeof userId !== "undefined"){
                validateAns.innerText = "";
+               wrongAns = false;
             if(userAns === arrQues[k].a){
                 console.log("FinaluserSelection " +userId);
                 console.log("FinalCorrectAnswer : " +arrQues[k].a);   
@@ -133,6 +137,9 @@ function showResults(){
     ptag2.textContent = "Your final score: " +score;  
     content.append(ptag2);
     var ptag3 =  document.createElement("p");
+    var form = document.createElement("form");
+    var div = document.createElement("div");
+    div.setAttribute("class", "form-group");
     var label = document.createElement("label");
     label.setAttribute("for", "initials");
     label.textContent = "Your Initials: ";
@@ -140,46 +147,73 @@ function showResults(){
     var input = document.createElement("input");
      input.setAttribute("type", "text");
      input.setAttribute("name", "initials");
+     input.setAttribute("class", "form-control");
      input.setAttribute("id", "initials");
+     input.required=true;
      
-     ptag3.append(label);
-     ptag3.appendChild(input);
+     var button = document.createElement("button");
+     button.setAttribute("type", "submit");
+     button.setAttribute("class", "btn btn-primary");
+     button.textContent = "Submit";
+     div.append(label);
+     div.append(input);
+
+     form.append(div);
+     form.append(button);
+     ptag3.append(form);  
      content.append(ptag3);
     
+//      <form>
+//   <div class="form-group">
+//     <label for="email">Email address:</label>
+//     <input type="email" class="form-control" placeholder="Enter email" id="email">
+//   </div>
+//  
+//   <button type="submit" class="btn btn-primary">Submit</button>
+// </form>
 }
 
 function startTimer(){
+    
     console.log("Inside start timer");
     var totalSeconds = 80;
     var secondsElapsed = 0;
-    var interval;
+  
     var timer = document.createElement("div");
     timer.setAttribute("class", "time");
     timer.setAttribute("style", "position: absolute; top: 8px; right: 16px; font-size: 18px;");
     timer.textContent = "Time : ";
     var spanSeconds = document.createElement("span");
     spanSeconds.setAttribute("id", "seconds");
-
+    
     if (totalSeconds > 0) {
          interval = setInterval(function() {
-            secondsElapsed++;  
-            var secondsLeft = totalSeconds - secondsElapsed;          
-            console.log("secondsLeft" +secondsLeft);   
-            spanSeconds.textContent = secondsLeft;
+            secondsElapsed++; 
+            var secondsLeft;  
             console.log("Wrong Ans" + wrongAns);
             if(wrongAns){
-                var newSecondsLeft = secondsLeft - 10;
-                console.log("newSecondsLeft" +newSecondsLeft);   
-                spanSeconds.textContent = newSecondsLeft;  
-                wrongAns = false;          
+               
+                var sec = (totalSeconds - secondsElapsed);
+                secondsLeft =  sec - 10;
+                // console.log("newSecondsLeft" +secondsLeft);    
+                        
+            }else{
+                
+                secondsLeft = totalSeconds - secondsElapsed ;        
+                
             }
+            // console.log("secondsLeft" +secondsLeft);   
+            spanSeconds.textContent = secondsLeft;
             timer.append(spanSeconds);
             container.append(timer);
+            
         }, 1000);
         } 
     }
 
-
+function stopTimer(){
+    clearInterval(interval);
+}
 
 quizBtn.addEventListener("click",  startTimer);
 quizBtn.addEventListener("click", startQuiz);
