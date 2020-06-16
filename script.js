@@ -6,6 +6,11 @@ var container = document.querySelector(".container");
 var quizImage =document.querySelector(".quizImage");
 var resultDisplay = document.getElementById("resultDisplay");
 var timer = document.querySelector("#timer");
+var highscoreDisplay = document.getElementById("highscoreDisplay");
+var highscoreValue = document.getElementById("highscoreValue");
+var goBack         = document.getElementById("goBack");
+var clearHighscores = document.getElementById("clearHighscores");
+
 
 var i=0; var k=0;
 var score=0;
@@ -15,6 +20,9 @@ var wrongAns = false;
 var interval;
 // var secondsLeft;  
 var totalSeconds = 80;
+var ptag;
+var input;
+
 
 
 var arrQues = [
@@ -131,7 +139,7 @@ function showResults(){
      console.log("Inside showResults");
      content.textContent = "";
      queslistEl.innerHTML = "";
-     var ptag = document.createElement("p");
+     ptag = document.createElement("p");
      ptag.setAttribute("class", "mt-4")
      ptag.textContent = "Congratulations!!! You secured " +(score/arrQues.length)*100 +" percentage ";
      content.append(ptag);
@@ -150,7 +158,7 @@ function showResults(){
     label.setAttribute("for", "initials");
     label.textContent = "Your Initials: ";
     label.setAttribute("style", "margin-right:8px;");
-    var input = document.createElement("input");
+    input = document.createElement("input");
      input.setAttribute("type", "text");
      input.setAttribute("name", "initials");
      input.setAttribute("class", "form-control");
@@ -160,6 +168,7 @@ function showResults(){
      var button = document.createElement("button");
      button.setAttribute("type", "submit");
      button.setAttribute("class", "btn btn-primary");
+     button.setAttribute("id", "submitBtn");
      button.textContent = "Submit";
      div.append(label);
      div.append(input);
@@ -198,6 +207,36 @@ function stopTimer(){
     
 }
 
+
 quizBtn.addEventListener("click",  startTimer);
 quizBtn.addEventListener("click", startQuiz);
 queslistEl.addEventListener("click", ansSelection);
+
+document.addEventListener("click",function(event){
+    event.preventDefault();
+  if(event.target.id === 'submitBtn'){
+   
+     var enteredInitials = document.getElementById("initials").value;
+     console.log("enteredInitials" +enteredInitials);
+     content.textContent = "";
+     resultDisplay.textContent = "";
+     goBack.style.visibility = "visible";
+     clearHighscores.style.visibility = "visible";
+     highscoreDisplay.textContent = "Highscores";
+     highscoreDisplay.setAttribute("style","font-size:20px; font-style:bold");
+
+     var userDetails = {
+         userInitials : enteredInitials,
+         score        :  score
+     };
+     localStorage.setItem("userDetails", JSON.stringify(userDetails));
+
+    var lastUser = JSON.parse(localStorage.getItem("userDetails"));
+    highscoreValue.textContent = lastUser.userInitials+ " - " +lastUser.score; 
+    console.log(lastUser.userInitials);
+    console.log(lastUser.score);
+    highscoreDisplay.append(highscoreValue);
+  
+    
+  }
+});

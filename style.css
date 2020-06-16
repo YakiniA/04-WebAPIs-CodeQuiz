@@ -26,6 +26,13 @@ header{
 
 }
 
+#clearHighscores{
+   visibility : hidden;
+}
+
+#goBack{
+   visibility: hidden;
+}
 ul {
    list-style-type: none;
    
