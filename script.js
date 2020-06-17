@@ -21,8 +21,7 @@ var interval;
 var totalSeconds = 80;
 var ptag;
 var input;
-var userInitials;
-var userScore;
+
 
 var arrQues = [
     {q: "Where is the correct place to insert a JavaScript? ",  
@@ -205,6 +204,8 @@ document.addEventListener("click",function(event){
 });
  
 function displayHighscores(initials, score){
+    var userInitials;
+    var userScore;
     content.textContent = "";
     highscoreDisplay.textContent = "Highscores";
     highscoreDisplay.setAttribute("style","font-size:28px; font-style:bold; padding:25px;");
@@ -229,17 +230,16 @@ function displayHighscores(initials, score){
     var lastUser1 = JSON.parse(localStorage.getItem("userScore"));
     console.log(lastUser.length-1);
     console.log(lastUser1.length-1);
-    for(var values= 0; values<userInitials.length; values++){
-          initials = userInitials[values];
-          scoreValue = userScore[values];
-               
-          highscoreValue. textContent = initials+ " - " +scoreValue+ "</br>"; 
+    for(var values= 0; values<lastUser.length; values++){
+          console.log(lastUser[values]);
+          console.log(lastUser1[values]);
+          highscoreValue. textContent = lastUser[values]+ " - " +lastUser1[values]; 
+        
     }
             // highscoreValue.textContent = lastUser[(lastUser.length-1)]+ " - " +lastUser1[(lastUser1.length -1)]; 
     highscoreValue.setAttribute("style","margin:16px 0; font-size:18px;");
     highscoreDisplay.append(highscoreValue);
 
-   
     var button1 = document.createElement("button");
     button1.setAttribute("id", "goBack");
     button1.setAttribute("class", "btn btn-primary mr-5");
@@ -266,28 +266,4 @@ function displayHighscores(initials, score){
 
   }
 
-
-// viewHighscore.addEventListener("click", function(event){
-//     event.preventDefault();
-//     if(event.target.matches("span")){
-//    var initials;
-//    var scoreValue;
-//    highscoreDisplay.setAttribute("style","font-size:28px; font-style:bold; padding:25px;");
-//     if(localStorage.getItem("userInitials") && localStorage.getItem("userScore")){
-//         userInitials = JSON.parse(localStorage.getItem("userInitials"));
-//         userScore = JSON.parse(localStorage.getItem("userScore"));
-//     }else{
-//          highscoreDisplay.textContent = "Recent Score Values not available. Please take a test!!!";
-//     }
-   
-//     highscoreDisplay.textContent= "Highscores";
-//     for(var value = 0; values<userInitials.length; values++){
-//         initials = userInitials[value];
-//         scoreValue = userScore[value];
-       
-//         highscoreValue. textContent = initials+ " - " +scoreValue+ "</br>"; 
-
-//     }
-//     }
-// });
 
