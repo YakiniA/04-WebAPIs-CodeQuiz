@@ -8,6 +8,10 @@ var resultDisplay = document.getElementById("resultDisplay");
 var timer = document.querySelector("#timer");
 var highscoreDisplay = document.getElementById("highscoreDisplay");
 var highscoreValue = document.getElementById("highscoreValue");
+var viewHighscore = document.getElementById("highscore");
+var recentScoreDisplay =document.getElementById("recentScoreDisplay");
+var recentScoreValue = document.getElementById("recentScoreValue");
+
 
 var i=0; var k=0;
 var score=0;
@@ -17,6 +21,8 @@ var interval;
 var totalSeconds = 80;
 var ptag;
 var input;
+var userInitials;
+var userScore;
 
 var arrQues = [
     {q: "Where is the correct place to insert a JavaScript? ",  
@@ -126,7 +132,7 @@ function ansSelection(event){
 
 function showResults(){
     stopTimer();
-    
+    resultDisplay.textContent="";
     console.log("Inside showResults");
     content.textContent = "";
     queslistEl.innerHTML = "";
@@ -191,26 +197,48 @@ queslistEl.addEventListener("click", ansSelection);
 document.addEventListener("click",function(event){
     event.preventDefault();
   if(event.target.id === 'submitBtn'){
-   
+     
      var enteredInitials = document.getElementById("initials").value;
      console.log("enteredInitials" +enteredInitials);
-     content.textContent = "";
-     resultDisplay.textContent = "";
-     highscoreDisplay.textContent = "Highscores";
-     highscoreDisplay.setAttribute("style","font-size:28px; font-style:bold; padding:25px;");
+     displayHighscores(initials,score);
+    }
+});
+ 
+function displayHighscores(initials, score){
+    content.textContent = "";
+    highscoreDisplay.textContent = "Highscores";
+    highscoreDisplay.setAttribute("style","font-size:28px; font-style:bold; padding:25px;");
+    if(localStorage.getItem("userInitials") && localStorage.getItem("userScore")){
+        userInitials = JSON.parse(localStorage.getItem("userInitials"));
+        userScore = JSON.parse(localStorage.getItem("userScore"));
+    }else{
+        userInitials = [];
+        userScore = [];
+    }
 
-     var userDetails = {
-         userInitials : enteredInitials,
-         score        : score
-     };
-     localStorage.setItem("userDetails", JSON.stringify(userDetails));
+    console.log(userInitials);
+    console.log(userScore);
 
-    var lastUser = JSON.parse(localStorage.getItem("userDetails"));
-    highscoreValue.textContent = lastUser.userInitials+ " - " +lastUser.score; 
+    userInitials.push(initials);
+    userScore.push(score);
+
+    localStorage.setItem("userInitials", JSON.stringify(userInitials));
+    localStorage.setItem("userScore", JSON.stringify(userScore));
+
+    var lastUser = JSON.parse(localStorage.getItem("userInitials"));
+    var lastUser1 = JSON.parse(localStorage.getItem("userScore"));
+    console.log(lastUser.length-1);
+    console.log(lastUser1.length-1);
+    for(var values= 0; values<userInitials.length; values++){
+          initials = userInitials[values];
+          scoreValue = userScore[values];
+               
+          highscoreValue. textContent = initials+ " - " +scoreValue+ "</br>"; 
+    }
+            // highscoreValue.textContent = lastUser[(lastUser.length-1)]+ " - " +lastUser1[(lastUser1.length -1)]; 
     highscoreValue.setAttribute("style","margin:16px 0; font-size:18px;");
-    console.log(lastUser.userInitials);
-    console.log(lastUser.score);
     highscoreDisplay.append(highscoreValue);
+
    
     var button1 = document.createElement("button");
     button1.setAttribute("id", "goBack");
@@ -237,4 +265,29 @@ document.addEventListener("click",function(event){
     });
 
   }
-});
+
+
+// viewHighscore.addEventListener("click", function(event){
+//     event.preventDefault();
+//     if(event.target.matches("span")){
+//    var initials;
+//    var scoreValue;
+//    highscoreDisplay.setAttribute("style","font-size:28px; font-style:bold; padding:25px;");
+//     if(localStorage.getItem("userInitials") && localStorage.getItem("userScore")){
+//         userInitials = JSON.parse(localStorage.getItem("userInitials"));
+//         userScore = JSON.parse(localStorage.getItem("userScore"));
+//     }else{
+//          highscoreDisplay.textContent = "Recent Score Values not available. Please take a test!!!";
+//     }
+   
+//     highscoreDisplay.textContent= "Highscores";
+//     for(var value = 0; values<userInitials.length; values++){
+//         initials = userInitials[value];
+//         scoreValue = userScore[value];
+       
+//         highscoreValue. textContent = initials+ " - " +scoreValue+ "</br>"; 
+
+//     }
+//     }
+// });
+
