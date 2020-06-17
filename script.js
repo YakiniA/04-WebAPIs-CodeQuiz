@@ -201,7 +201,7 @@ document.addEventListener("click",function(event){
 
      var userDetails = {
          userInitials : enteredInitials,
-         score        :  score
+         score        : score
      };
      localStorage.setItem("userDetails", JSON.stringify(userDetails));
 
@@ -224,6 +224,11 @@ document.addEventListener("click",function(event){
 
     highscoreDisplay.append(button1);
     highscoreDisplay.append(button2);
+
+    button1.addEventListener("click", function(event){
+        event.preventDefault();
+        window.location.reload();
+    });
 
     button2.addEventListener("click", function(event) {
           event.preventDefault();
