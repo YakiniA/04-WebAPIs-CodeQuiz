@@ -85,26 +85,27 @@ function startQuiz(event){
 
 function ansSelection(event){
     event.preventDefault();
-
-   colHeader.addEventListener("click", function(event){
-        event.preventDefault();
-        console.log(event.target.id);
-       
-        if(event.target.id === 'highscore'){
-            alert("On pressing 'View Highscore' now will end the quiz");
-            highscoreTitle.textContent="";
-            highscoreDisplay.textContent="";
-            content.textContent = "";
-            queslistEl.innerHTML = "";
-            resultDisplay.textContent="";
-            
-            displayHighscores(highscoreInitials,scoreVal);
- 
-        }
-    });
    
     if(event.target.matches("li")){
       
+        
+//    colHeader.addEventListener("click", function(event){
+//     event.preventDefault();
+//     console.log(event.target.id);
+   
+//     if(event.target.id === 'highscore'){
+//         alert("On pressing 'View Highscore' now will end the quiz");
+//         highscoreTitle.textContent="";
+//         highscoreDisplay.textContent="";
+//         content.textContent = "";
+//         queslistEl.innerHTML = "";
+//         resultDisplay.textContent="";
+        
+//         displayHighscores(highscoreInitials,scoreVal);
+
+//     }
+// });
+
        userId = event.target.id;
        console.log("Target Id: " +userId);
 
@@ -215,6 +216,7 @@ document.addEventListener("click",function(event){
 });
  
 function displayHighscores(initials, score){
+    // debugger
     var userInitials;
     var userScore;
     content.textContent = "";
@@ -230,7 +232,8 @@ function displayHighscores(initials, score){
         userInitials = [];
         userScore = [];
     }
-      if(initials!=null && score!=null){         
+      if((initials!=null && score!=null) && (initials!="" || score!="")){   
+        //   debugger      
         console.log("Hey I'm in" +initials);
         userInitials.push(initials);
         userScore.push(score);
@@ -249,11 +252,11 @@ function displayHighscores(initials, score){
            console.log(finalScore[values]);
            var highscoreValue1 = document.createElement("p");
            highscoreValue1.setAttribute("style","margin:16px 0; font-size:18px;");
-           if(finalInitials[values]!="" && finalScore[values]!="" &&
-           finalInitials[values]!=null && finalScore[values]!=null ){
+        //    if((finalInitials[values]!="" && finalScore[values]!="") &&
+        //    (finalInitials[values]!=null && finalScore[values]!=null)){
            console.log(finalInitials[values] + finalInitials[values]);
            highscoreValue1. textContent = finalInitials[values]+ " - " +finalScore[values]; 
-           }
+        //    }
            highscoreDisplay.prepend(highscoreValue1);
      }
     highscoreTitle.append(highscoreDisplay);
@@ -302,9 +305,12 @@ function displayHighscores(initials, score){
         if(event.target.id === 'highscore'){
             highscoreTitle.textContent="";
             highscoreDisplay.textContent="";
+            content.textContent = "";
+            queslistEl.innerHTML = "";
+            resultDisplay.textContent="";
             quizImage.remove();
             quizBtn.remove();
-            displayHighscores(highscoreInitials,score);
+            displayHighscores(highscoreInitials,scoreVal);
         }
   });
 
