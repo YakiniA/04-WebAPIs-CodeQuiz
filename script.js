@@ -24,12 +24,12 @@ var input;
 
 
 var arrQues = [
-    {q: "Where is the correct place to insert a JavaScript? ",  
-    options : ["The <body> section", 
-     "Both the <head> section and <body> section are correct",
-     "The <head> section",
-     "Below the <body> section"],
-     a: "Below the <body> section"},
+    {q: "How do you create a function in JavaScript?",  
+    options : ["function:myFunction()", 
+     "function = myFunction()",
+     "function myFunction()",
+     "All are correct"],
+     a: "function myFunction()"},
    
     {q: "Which builtin method returns the length of the string?",
     options : ["length()",
@@ -196,7 +196,7 @@ document.addEventListener("click",function(event){
     event.preventDefault();
   if(event.target.id === 'submitBtn'){
     
-     var enteredInitials = document.getElementById("initials").value;
+     var enteredInitials = document.getElementById("initials").value.trim();
      console.log("enteredInitials" +enteredInitials);
      displayHighscores(enteredInitials,score);
     }
@@ -207,6 +207,8 @@ function displayHighscores(initials, score){
     var userScore;
     content.textContent = "";
     highscoreTitle.textContent = "Highscores";
+    var title =  document.createElement("p");
+    highscoreTitle.append(title);
     highscoreTitle.setAttribute("style","font-size:28px; font-style:bold; padding:25px;  !important");
     if(localStorage.getItem("userInitials") && localStorage.getItem("userScore")){
         userInitials = JSON.parse(localStorage.getItem("userInitials"));
@@ -221,7 +223,7 @@ function displayHighscores(initials, score){
         userInitials = [];
         userScore = [];
     }
-      if(initials!=="" && score!==""){         //howto check this condition??
+      if(initials!=="" && score!==""){         
         console.log("Hey I'm in" +initials);
         userInitials.push(initials);
         userScore.push(score);
@@ -232,7 +234,8 @@ function displayHighscores(initials, score){
 
     var finalInitials = JSON.parse(localStorage.getItem("userInitials"));
     var finalScore = JSON.parse(localStorage.getItem("userScore"));
-    
+   console.log("FinalInitials" +finalInitials);
+    if(finalInitials!=null){
      for(var values= 0; values<finalInitials.length; values++){
            console.log(finalInitials[values]);
            console.log(finalScore[values]);
@@ -242,6 +245,12 @@ function displayHighscores(initials, score){
            highscoreDisplay.prepend(highscoreValue1);
      }
     highscoreTitle.append(highscoreDisplay);
+    }
+
+   
+
+    console.log("Highscore Display Value" +highscoreDisplay);
+    
     var button1 = document.createElement("button");
     button1.setAttribute("id", "goBack");
     button1.setAttribute("class", "btn btn-primary mr-5");
@@ -252,8 +261,10 @@ function displayHighscores(initials, score){
     button2.setAttribute("class", "btn btn-primary");
     button2.textContent = "Clear Highscores";
 
-    highscoreDisplay.append(button1);
-    highscoreDisplay.append(button2);
+    // highscoreDisplay.append(button1);
+    // highscoreDisplay.append(button2);
+    highscoreTitle.append(button1);
+    highscoreTitle.append(button2);
 
     button1.addEventListener("click", function(event){
         event.preventDefault();
@@ -263,13 +274,13 @@ function displayHighscores(initials, score){
     button2.addEventListener("click", function(event) {
           event.preventDefault();
         //   highscoreValue1.textContent = "";
+        if(event.target.id === 'clearHighscores'){
           localStorage.removeItem('userInitials');
-          localstoreage.removeItem('userScore');
-          highscoreTitle.textContent="";
+          localStorage.removeItem('userScore');
           highscoreDisplay.textContent="";
         //   displayHighscores(highscoreInitials,score);
         //   window.location.reload();
-
+        }
     });
 
   }
