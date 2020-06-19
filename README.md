@@ -22,4 +22,4 @@ On clicking "Submit" shows the recent highscores so that the user can compare th
 * goBack - On Clicking "goBack" reaches the homePage and the user can start another quiz.
 * Clear Highscore - On Clicking "Clear Highscores" clears the scores, not only from the page but also from the localStorage. 
 Note: On clicking this button, no scores will be there to see. The user have to take the test again to see the score.
-* View Highscore  - 
+* View Highscore  - It lists all the recent scores with the recent scores first.

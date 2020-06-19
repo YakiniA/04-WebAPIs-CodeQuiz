@@ -69,10 +69,7 @@ function startQuiz(event){
     quizBtn.remove();
    
     if(arrQues[i] !== undefined){
-       
-        console.log(arrQues[i]);
-        ques.textContent = arrQues[i].q;
-        
+        ques.textContent = arrQues[i].q;       
             for(var j=0 ; j<arrQues[i].options.length; j++){
                 var li = document.createElement("li");
                 li.innerHTML = (j+1) + ". " +arrQues[i].options[j];
@@ -87,38 +84,12 @@ function ansSelection(event){
     event.preventDefault();
    
     if(event.target.matches("li")){
-      
-        
-//    colHeader.addEventListener("click", function(event){
-//     event.preventDefault();
-//     console.log(event.target.id);
-   
-//     if(event.target.id === 'highscore'){
-//         alert("On pressing 'View Highscore' now will end the quiz");
-//         highscoreTitle.textContent="";
-//         highscoreDisplay.textContent="";
-//         content.textContent = "";
-//         queslistEl.innerHTML = "";
-//         resultDisplay.textContent="";
-        
-//         displayHighscores(highscoreInitials,scoreVal);
-
-//     }
-// });
-
        userId = event.target.id;
-       console.log("Target Id: " +userId);
-
-        var userAns = arrQues[k].options[userId];
-        console.log("userAns: " +userAns);
-
+       var userAns = arrQues[k].options[userId];
         if(typeof userId !== "undefined"){
             resultDisplay.textContent = "";
               
-            if(userAns === arrQues[k].a){
-                console.log("FinaluserSelection " +userId);
-                console.log("FinalCorrectAnswer : " +arrQues[k].a);   
-                
+            if(userAns === arrQues[k].a){               
                 resultDisplay.textContent = "Hurray Correct!!"
                 resultDisplay.setAttribute("style", "background-color:green; margin: 8px; width:150px; font-size: 20px;");
                 
@@ -133,12 +104,7 @@ function ansSelection(event){
     }
    
     startQuiz();
-    console.log("My Score" +score);    
-    
-    console.log("liCount" +liCount);
-
     if(liCount === arrQues.length){
-        console.log("Show Results");
         showResults();
     }
     liCount++;
@@ -149,7 +115,6 @@ function ansSelection(event){
 function showResults(){
     stopTimer();
     resultDisplay.textContent="";
-    console.log("Inside showResults");
     content.textContent = "";
     queslistEl.innerHTML = "";
     ptag = document.createElement("p");
@@ -210,7 +175,6 @@ document.addEventListener("click",function(event){
   if(event.target.id === 'submitBtn'){
     
      var enteredInitials = document.getElementById("initials").value.trim();
-     console.log("enteredInitials" +enteredInitials);
      displayHighscores(enteredInitials,score);
     }
 });
@@ -227,14 +191,11 @@ function displayHighscores(initials, score){
     if(localStorage.getItem("userInitials") && localStorage.getItem("userScore")){
         userInitials = JSON.parse(localStorage.getItem("userInitials"));
         userScore = JSON.parse(localStorage.getItem("userScore"));  
-        console.log("LocalStorageLength" +localStorage.length);
     }else{
         userInitials = [];
         userScore = [];
     }
       if((initials!=null && score!=null) && (initials!="" || score!="")){   
-        //   debugger      
-        console.log("Hey I'm in" +initials);
         userInitials.push(initials);
         userScore.push(score);
 
@@ -244,30 +205,21 @@ function displayHighscores(initials, score){
 
     var finalInitials = JSON.parse(localStorage.getItem("userInitials"));
     var finalScore = JSON.parse(localStorage.getItem("userScore"));
-   console.log("FinalInitials" +finalInitials);
   
     if(finalInitials!=null){
      for(var values= 0; values<finalInitials.length; values++){
-           console.log(finalInitials[values]);
-           console.log(finalScore[values]);
            var highscoreValue1 = document.createElement("p");
            highscoreValue1.setAttribute("style","margin:16px 0; font-size:18px;");
-        //    if((finalInitials[values]!="" && finalScore[values]!="") &&
-        //    (finalInitials[values]!=null && finalScore[values]!=null)){
-           console.log(finalInitials[values] + finalInitials[values]);
            highscoreValue1. textContent = finalInitials[values]+ " - " +finalScore[values]; 
-        //    }
            highscoreDisplay.prepend(highscoreValue1);
      }
     highscoreTitle.append(highscoreDisplay);
     }else{
         var title2 =  document.createElement("p");
-        title2.textContent = "No Highscore to display. Please take test!!!"
+        title2.textContent = "No Highscores to display. Please take test!!!"
         title2.setAttribute("style","margin:16px 0; font-size:18px;");
         highscoreTitle.append(title2);
     }
-
-    console.log("Highscore Display Value" +highscoreDisplay);
     
     var button1 = document.createElement("button");
     button1.setAttribute("id", "goBack");
@@ -301,7 +253,6 @@ function displayHighscores(initials, score){
 
   colHeader.addEventListener("click", function(event){
         event.preventDefault();
-        console.log(event.target.id);
         if(event.target.id === 'highscore'){
             highscoreTitle.textContent="";
             highscoreDisplay.textContent="";
