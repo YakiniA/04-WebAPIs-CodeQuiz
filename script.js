@@ -187,10 +187,6 @@ function stopTimer(){
     
 }
 
-quizBtn.addEventListener("click",  startTimer);
-quizBtn.addEventListener("click", startQuiz);
-queslistEl.addEventListener("click", ansSelection);
-
 document.addEventListener("click",function(event){
     event.preventDefault();
   if(event.target.id === 'submitBtn'){
@@ -289,6 +285,10 @@ function displayHighscores(initials, score){
             displayHighscores(highscoreInitials,score);
         }
   });
+
+quizBtn.addEventListener("click",  startTimer);
+quizBtn.addEventListener("click", startQuiz);
+queslistEl.addEventListener("click", ansSelection);
 
   
 
