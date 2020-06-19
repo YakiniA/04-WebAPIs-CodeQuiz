@@ -12,7 +12,7 @@ var highscoreValue = document.getElementById("highscoreValue");
 var viewHighscore = document.getElementById("highscore");
 var colHeader = document.querySelector(".col-header");
 var highscoreInitials ="";
-
+var scoreVal = "";
 var i=0; var k=0;
 var score=0;
 var userId = "";
@@ -85,6 +85,23 @@ function startQuiz(event){
 
 function ansSelection(event){
     event.preventDefault();
+
+   colHeader.addEventListener("click", function(event){
+        event.preventDefault();
+        console.log(event.target.id);
+       
+        if(event.target.id === 'highscore'){
+            alert("On pressing 'View Highscore' now will end the quiz");
+            highscoreTitle.textContent="";
+            highscoreDisplay.textContent="";
+            content.textContent = "";
+            queslistEl.innerHTML = "";
+            resultDisplay.textContent="";
+            
+            displayHighscores(highscoreInitials,scoreVal);
+ 
+        }
+    });
    
     if(event.target.matches("li")){
       
@@ -213,7 +230,7 @@ function displayHighscores(initials, score){
         userInitials = [];
         userScore = [];
     }
-      if(initials!=="" && score!==""){         
+      if(initials!=null && score!=null){         
         console.log("Hey I'm in" +initials);
         userInitials.push(initials);
         userScore.push(score);
@@ -225,13 +242,18 @@ function displayHighscores(initials, score){
     var finalInitials = JSON.parse(localStorage.getItem("userInitials"));
     var finalScore = JSON.parse(localStorage.getItem("userScore"));
    console.log("FinalInitials" +finalInitials);
+  
     if(finalInitials!=null){
      for(var values= 0; values<finalInitials.length; values++){
            console.log(finalInitials[values]);
            console.log(finalScore[values]);
            var highscoreValue1 = document.createElement("p");
            highscoreValue1.setAttribute("style","margin:16px 0; font-size:18px;");
+           if(finalInitials[values]!="" && finalScore[values]!="" &&
+           finalInitials[values]!=null && finalScore[values]!=null ){
+           console.log(finalInitials[values] + finalInitials[values]);
            highscoreValue1. textContent = finalInitials[values]+ " - " +finalScore[values]; 
+           }
            highscoreDisplay.prepend(highscoreValue1);
      }
     highscoreTitle.append(highscoreDisplay);
