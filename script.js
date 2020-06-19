@@ -74,7 +74,6 @@ function startQuiz(event){
         ques.textContent = arrQues[i].q;
         
             for(var j=0 ; j<arrQues[i].options.length; j++){
-                // console.log(arrQues[i].options[j]);
                 var li = document.createElement("li");
                 li.innerHTML = (j+1) + ". " +arrQues[i].options[j];
                 li.setAttribute("id", j);
@@ -174,9 +173,9 @@ function startTimer(){
     interval = setInterval(function() {
         totalSeconds--;
         timer.textContent = "Time : " +totalSeconds;         
-             if(totalSeconds<0){
-                alert("Time Up!!!");
+             if(totalSeconds<0){        
                 stopTimer();
+                alert("Time Up!!!");
                 showResults();
                 timer.textContent = "Time : 0";
             }
@@ -214,11 +213,6 @@ function displayHighscores(initials, score){
         userInitials = JSON.parse(localStorage.getItem("userInitials"));
         userScore = JSON.parse(localStorage.getItem("userScore"));  
         console.log("LocalStorageLength" +localStorage.length);
-       // if(userInitials.length){
-            // localStorage.removeItem('userInitials');
-            // localstoreage.removeItem('userScore');
-          
-      //  }
     }else{
         userInitials = [];
         userScore = [];
@@ -245,9 +239,12 @@ function displayHighscores(initials, score){
            highscoreDisplay.prepend(highscoreValue1);
      }
     highscoreTitle.append(highscoreDisplay);
+    }else{
+        var title2 =  document.createElement("p");
+        title2.textContent = "No Highscore to display. Please take test!!!"
+        title2.setAttribute("style","margin:16px 0; font-size:18px;");
+        highscoreTitle.append(title2);
     }
-
-   
 
     console.log("Highscore Display Value" +highscoreDisplay);
     
@@ -261,8 +258,6 @@ function displayHighscores(initials, score){
     button2.setAttribute("class", "btn btn-primary");
     button2.textContent = "Clear Highscores";
 
-    // highscoreDisplay.append(button1);
-    // highscoreDisplay.append(button2);
     highscoreTitle.append(button1);
     highscoreTitle.append(button2);
 
@@ -273,13 +268,11 @@ function displayHighscores(initials, score){
 
     button2.addEventListener("click", function(event) {
           event.preventDefault();
-        //   highscoreValue1.textContent = "";
         if(event.target.id === 'clearHighscores'){
           localStorage.removeItem('userInitials');
           localStorage.removeItem('userScore');
           highscoreDisplay.textContent="";
-        //   displayHighscores(highscoreInitials,score);
-        //   window.location.reload();
+      
         }
     });
 
