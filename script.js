@@ -6,12 +6,12 @@ var container = document.querySelector(".container");
 var quizImage =document.querySelector(".quizImage");
 var resultDisplay = document.getElementById("resultDisplay");
 var timer = document.querySelector("#timer");
+var highscoreTitle = document.getElementById("highscoreTitle");
 var highscoreDisplay = document.getElementById("highscoreDisplay");
 var highscoreValue = document.getElementById("highscoreValue");
 var viewHighscore = document.getElementById("highscore");
-var recentScoreDisplay =document.getElementById("recentScoreDisplay");
-var recentScoreValue = document.getElementById("recentScoreValue");
-
+var colHeader = document.querySelector(".col-header");
+var highscoreInitials ="";
 
 var i=0; var k=0;
 var score=0;
@@ -188,7 +188,6 @@ function stopTimer(){
     
 }
 
-
 quizBtn.addEventListener("click",  startTimer);
 quizBtn.addEventListener("click", startQuiz);
 queslistEl.addEventListener("click", ansSelection);
@@ -196,7 +195,7 @@ queslistEl.addEventListener("click", ansSelection);
 document.addEventListener("click",function(event){
     event.preventDefault();
   if(event.target.id === 'submitBtn'){
-     
+    
      var enteredInitials = document.getElementById("initials").value;
      console.log("enteredInitials" +enteredInitials);
      displayHighscores(enteredInitials,score);
@@ -207,9 +206,8 @@ function displayHighscores(initials, score){
     var userInitials;
     var userScore;
     content.textContent = "";
-    highscoreDisplay.textContent = "Highscores";
-    highscoreDisplay.setAttribute("style","font-size:28px; font-style:bold; padding:25px;");
-  
+    highscoreTitle.textContent = "Highscores";
+    highscoreTitle.setAttribute("style","font-size:28px; font-style:bold; padding:25px;  !important");
     if(localStorage.getItem("userInitials") && localStorage.getItem("userScore")){
         userInitials = JSON.parse(localStorage.getItem("userInitials"));
         userScore = JSON.parse(localStorage.getItem("userScore"));  
@@ -223,12 +221,7 @@ function displayHighscores(initials, score){
         userInitials = [];
         userScore = [];
     }
-
-
-    console.log(userInitials);
-    console.log(userScore);
-
-    if(initials!=="" && score!==""){
+      if(initials!=="" && score!==""){         //howto check this condition??
         console.log("Hey I'm in" +initials);
         userInitials.push(initials);
         userScore.push(score);
@@ -239,8 +232,7 @@ function displayHighscores(initials, score){
 
     var finalInitials = JSON.parse(localStorage.getItem("userInitials"));
     var finalScore = JSON.parse(localStorage.getItem("userScore"));
-    console.log(finalInitials.length-1);
-    console.log(finalScore.length-1);
+    
      for(var values= 0; values<finalInitials.length; values++){
            console.log(finalInitials[values]);
            console.log(finalScore[values]);
@@ -249,10 +241,7 @@ function displayHighscores(initials, score){
            highscoreValue1. textContent = finalInitials[values]+ " - " +finalScore[values]; 
            highscoreDisplay.prepend(highscoreValue1);
      }
-
-    // localStorage.removeItem('userInitials');
-    // localstorage.removeItem('userScore');
-
+    highscoreTitle.append(highscoreDisplay);
     var button1 = document.createElement("button");
     button1.setAttribute("id", "goBack");
     button1.setAttribute("class", "btn btn-primary mr-5");
@@ -273,10 +262,30 @@ function displayHighscores(initials, score){
 
     button2.addEventListener("click", function(event) {
           event.preventDefault();
-          highscoreValue1.textContent = "";
+        //   highscoreValue1.textContent = "";
+          localStorage.removeItem('userInitials');
+          localstoreage.removeItem('userScore');
+          highscoreTitle.textContent="";
+          highscoreDisplay.textContent="";
+        //   displayHighscores(highscoreInitials,score);
+        //   window.location.reload();
 
     });
 
   }
+
+  colHeader.addEventListener("click", function(event){
+        event.preventDefault();
+        console.log(event.target.id);
+        if(event.target.id === 'highscore'){
+            highscoreTitle.textContent="";
+            highscoreDisplay.textContent="";
+            quizImage.remove();
+            quizBtn.remove();
+            displayHighscores(highscoreInitials,score);
+        }
+  });
+
+  
 
 
