@@ -183,12 +183,16 @@ document.addEventListener("click",function(event){
     event.preventDefault();
   if(event.target.id === 'submitBtn'){
      var enteredInitials = document.getElementById("initials").value.trim();
-
+     console.log(typeof enteredInitials);
      if(enteredInitials ===""){
          alert("Please enter initials");
+        
+     }else if(!(/[a-z]/gi.test(enteredInitials))){
+         alert("Please enter Character");
      }else{
      displayHighscores(enteredInitials,score);
      }
+     
     }
 });
  
