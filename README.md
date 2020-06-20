@@ -40,5 +40,5 @@ Here's the link to my developed Website : [Web API-CodeQuiz](https://yakinia.git
 
 StackOverflow-Timer : [Timer](https://stackoverflow.com/questions/58964755/subtract-time-from-timer-if-answer-is-wrong-creating-a-quiz-javascript)<br/>
 StackOverflow-DynamicElements: [DynamicElements](https://stackoverflow.com/questions/34896106/attach-event-to-dynamic-elements-in-javascript)<br/>
-Blog-LocalStorage : [LocalStorage](https://www.taniarascia.com/how-to-use-local-storage-with-javascript/)
+Blog-LocalStorage : [LocalStorage](https://www.taniarascia.com/how-to-use-local-storage-with-javascript/)<br/>
 LocalStorage-Javascript: [LocalStorage](https://medium.com/better-programming/how-to-use-local-storage-with-javascript-9598834c8b72)
