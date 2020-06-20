@@ -23,3 +23,22 @@ On clicking "Submit" shows the recent highscores so that the user can compare th
 * Clear Highscore - On Clicking "Clear Highscores" clears the scores, not only from the page but also from the localStorage. 
 Note: On clicking this button, no scores will be there to see. The user have to take the test again to see the score.
 * View Highscore  - It lists all the recent scores with the recent scores first.
+
+#### Screenshots
+
+<p style ="text-align:center;">
+<img src="Assets/CodeQuizHomePage.jpg" width="300" alt= "HomePage" height="350"/>
+<img src="Assets/CodeQuizQuesAns.jpg"  width="300" alt="Ques and Ans page" height="350"/>
+<img src="Assets/CodeQuizResultsPage.jpg" width="300" alt="Show Results Page" height="350"/>
+<img src="Assets/CodeQuizDisplayHighscores.jpg"  width="300" alt="Display Highscores Page" height="350"/>
+<img src="Assets/CodeQuizAlertDisplay.jpg"  width="300" alt="Alert Display Page" height="350"/>
+</p>
+
+Here's the link to my developed Website : [Web API-CodeQuiz](https://yakinia.github.io/04-WebAPIs-CodeQuiz)
+
+##### References
+
+StackOverflow-Timer : [Timer](https://stackoverflow.com/questions/58964755/subtract-time-from-timer-if-answer-is-wrong-creating-a-quiz-javascript)<br/>
+StackOverflow-DynamicElements: [DynamicElements](https://stackoverflow.com/questions/34896106/attach-event-to-dynamic-elements-in-javascript)<br/>
+Blog-LocalStorage : [LocalStorage](https://www.taniarascia.com/how-to-use-local-storage-with-javascript/)
+LocalStorage-Javascript: [LocalStorage](https://medium.com/better-programming/how-to-use-local-storage-with-javascript-9598834c8b72)
