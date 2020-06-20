@@ -1,3 +1,4 @@
+// Variable declaration
 var quizBtn = document.getElementById("quizButton");
 var ques = document.getElementById("question");
 var content = document.querySelector(".content");
@@ -21,7 +22,6 @@ var interval;
 var totalSeconds = 80;
 var ptag;
 var input;
-
 
 var arrQues = [
     {q: "How do you create a function in JavaScript?",  
@@ -61,7 +61,7 @@ var arrQues = [
     a: "forEach()"}
 ]
 
-
+// StartQuiz function is for displaying questions and answers
 function startQuiz(event){
    
     content.textContent = "";
@@ -80,6 +80,7 @@ function startQuiz(event){
     }
 }
 
+// This function is for evaluating the answer and saving the score value
 function ansSelection(event){
     event.preventDefault();
    
@@ -103,6 +104,7 @@ function ansSelection(event){
        
     }
    
+    // StartQuiz is being called to display successive questions
     startQuiz();
     if(liCount === arrQues.length){
         showResults();
@@ -112,19 +114,20 @@ function ansSelection(event){
     } 
 }
 
+// ShowResults for displaying the results page
 function showResults(){
     stopTimer();
     resultDisplay.textContent="";
     content.textContent = "";
     queslistEl.innerHTML = "";
-    ptag = document.createElement("p");
+    var ptag = document.createElement("p");
     ptag.setAttribute("class", "mt-4")
     ptag.textContent = "Completed!!! You secured " +(score/50)*100 +" percentage ";
     content.append(ptag);
     var ptag2 =  document.createElement("p");
     ptag2.textContent = "Your final score: " +score;  
     content.append(ptag2);
-    var ptag3 =  document.createElement("p");
+    // var ptag3 =  document.createElement("p");
     var form = document.createElement("form");
     var div = document.createElement("div");
     div.setAttribute("class", "form-group");
@@ -134,11 +137,12 @@ function showResults(){
     label.setAttribute("style", "margin-right:8px;");
     input = document.createElement("input");
      input.setAttribute("type", "text");
-     input.setAttribute("name", "initials");
-     input.setAttribute("class", "form-control");
      input.setAttribute("id", "initials");
-     input.required=true;
+     input.setAttribute("class", "form-control");
+     input.setAttribute("placeholder","JS");
+     input.setAttribute("required","true");
      
+  
      var button = document.createElement("button");
      button.setAttribute("type", "submit");
      button.setAttribute("class", "btn btn-primary");
@@ -146,12 +150,16 @@ function showResults(){
      button.textContent = "Submit";
      div.append(label);
      div.append(input);
+    
      form.append(div);
      form.append(button);
-     ptag3.append(form);  
-     content.append(ptag3);
+    
+     content.append(form);
+      
+  
 }
 
+// This starts the timer on pressing "Start Quiz" button
 function startTimer(){
     interval = setInterval(function() {
         totalSeconds--;
@@ -170,17 +178,22 @@ function stopTimer(){
     
 }
 
+// On Pressing "Submit Button" displayHighscores function is called
 document.addEventListener("click",function(event){
     event.preventDefault();
   if(event.target.id === 'submitBtn'){
-    
      var enteredInitials = document.getElementById("initials").value.trim();
+
+     if(enteredInitials ===""){
+         alert("Please enter initials");
+     }else{
      displayHighscores(enteredInitials,score);
+     }
     }
 });
  
+// This function first stores the value to localStorage and then displays the value 
 function displayHighscores(initials, score){
-    // debugger
     var userInitials;
     var userScore;
     content.textContent = "";
@@ -234,11 +247,13 @@ function displayHighscores(initials, score){
     highscoreTitle.append(button1);
     highscoreTitle.append(button2);
 
+    // Onpressing the "goBack" button displays the homePage
     button1.addEventListener("click", function(event){
         event.preventDefault();
         window.location.reload();
     });
 
+    // Onpressing the "ClearHighscores" clears the highscores from localStorage too
     button2.addEventListener("click", function(event) {
           event.preventDefault();
         if(event.target.id === 'clearHighscores'){
@@ -248,9 +263,9 @@ function displayHighscores(initials, score){
       
         }
     });
-
   }
 
+//   On clicking "View Highscores" call the display Highscores function
   colHeader.addEventListener("click", function(event){
         event.preventDefault();
         if(event.target.id === 'highscore'){
