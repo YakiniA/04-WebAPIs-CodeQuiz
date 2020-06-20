@@ -183,8 +183,8 @@ document.addEventListener("click",function(event){
      if(enteredInitials ===""){
          alert("Please enter initials");
         
-     }else if(!(/^[a-zA-Z][a-zA-Z]+$/.test(enteredInitials))){
-         alert("Please enter Character");
+     }else if(!(/^[a-zA-Z][a-zA-Z]$/.test(enteredInitials))){
+         alert("Please enter first two initials");
      }else{
      displayHighscores(enteredInitials,score);
      }
