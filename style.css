@@ -1,9 +1,7 @@
 .header {
 
     background-color: darkseagreen;
-
     padding: 7px 50px;
-
 }
 
 header{
@@ -12,14 +10,11 @@ header{
 }
 
 #timer {
-
     float: right;
-
 }
 
 ul {
    list-style-type: none;
-   
 }
 
 ul li{

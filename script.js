@@ -127,7 +127,7 @@ function showResults(){
     var ptag2 =  document.createElement("p");
     ptag2.textContent = "Your final score: " +score;  
     content.append(ptag2);
-    // var ptag3 =  document.createElement("p");
+
     var form = document.createElement("form");
     var div = document.createElement("div");
     div.setAttribute("class", "form-group");
@@ -136,27 +136,23 @@ function showResults(){
     label.textContent = "Your Initials: ";
     label.setAttribute("style", "margin-right:8px;");
     input = document.createElement("input");
-     input.setAttribute("type", "text");
-     input.setAttribute("id", "initials");
-     input.setAttribute("class", "form-control");
-     input.setAttribute("placeholder","JS");
-     input.setAttribute("required","true");
+    input.setAttribute("type", "text");
+    input.setAttribute("id", "initials");
+    input.setAttribute("class", "form-control");
+    input.setAttribute("placeholder","JS");
+    input.setAttribute("required","true");
      
-  
-     var button = document.createElement("button");
-     button.setAttribute("type", "submit");
-     button.setAttribute("class", "btn btn-primary");
-     button.setAttribute("id", "submitBtn");
-     button.textContent = "Submit";
-     div.append(label);
-     div.append(input);
-    
-     form.append(div);
-     form.append(button);
-    
-     content.append(form);
-      
-  
+    var button = document.createElement("button");
+    button.setAttribute("type", "submit");
+    button.setAttribute("class", "btn btn-primary");
+    button.setAttribute("id", "submitBtn");
+    button.textContent = "Submit";
+    div.append(label);
+    div.append(input);
+
+    form.append(div);
+    form.append(button);
+    content.append(form);   
 }
 
 // This starts the timer on pressing "Start Quiz" button
@@ -187,7 +183,7 @@ document.addEventListener("click",function(event){
      if(enteredInitials ===""){
          alert("Please enter initials");
         
-     }else if(!(/[a-z]/gi.test(enteredInitials))){
+     }else if(!(/^[a-zA-Z][a-zA-Z]+$/.test(enteredInitials))){
          alert("Please enter Character");
      }else{
      displayHighscores(enteredInitials,score);
